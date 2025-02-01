@@ -2,8 +2,8 @@ const daysContainer = document.querySelector('.days-container');
 const todayDay = document.querySelector('.today-day');
 const todayDate = document.querySelector('.date');
 
-const previousMonthButton = document.querySelector('.previous-month');
-const nextMonthButton = document.querySelector('.next-month');
+const previousMonthButton = document.querySelector('.previous-month i');
+const nextMonthButton = document.querySelector('.next-month i');
 
 const selectedMonthElement = document.querySelector('.selected-month');
 const selectedYearElement = document.querySelector('.selected-year');
@@ -13,6 +13,13 @@ const todayDayContainer = document.querySelector('.today-date');
 const nextCourseReminder = document.querySelector('.next-course');
 
 let daysWrapper = document.querySelector('.days-wrapper.active');
+
+const eventDateElement = document.querySelector('.event-date');
+const eventTitleElement = document.querySelector('.event-title');
+const eventDescriptionElement = document.querySelector('.event-description');
+const eventHourElement = document.querySelector('.event-hour');
+const eventButtonElement = document.querySelector('.event-button');
+const eventPictureElement = document.querySelector('.event-picture');
 
 let animationClass;
 
@@ -54,7 +61,7 @@ const events = {
       'Obligativitatea de livrare a documentațiilor de urbanism și amenajarea teritoriului în noul format GIS, conform Normelor tehnice aprobate prin Ordinul nr. 904/2023.',
     time: '17:00',
     pictureLink:
-      'https://oarbucuresti.cursuri.online/Pictures/GetPictureById?pictureId=06935af2-5b52-4353-bb61-b10a0518a570'
+      'https://oarbucuresti.cursuri.online/Pictures/GetPictureById?pictureId=6b99a5bf-66c7-4fcf-bb00-dcd107aed837'
   },
   '2025-03-25': {
     title: 'BIM | COSTS',
@@ -236,12 +243,6 @@ function handleEventDisplay(event) {
 }
 
 function showEventDetails(event) {
-  const eventDateElement = document.querySelector('.event-date');
-  const eventTitleElement = document.querySelector('.event-title');
-  const eventDescriptionElement = document.querySelector('.event-description');
-  const eventHourElement = document.querySelector('.event-hour');
-  const eventButtonElement = document.querySelector('.event-button');
-  const eventPictureElement = document.querySelector('.event-picture');
 
   const eventDate =
     `${event.date.split('-')[2]}` +
@@ -288,9 +289,9 @@ previousMonthButton.addEventListener('click', handleMonthChange);
 nextMonthButton.addEventListener('click', handleMonthChange);
 
 function handleMonthChange(event) {
-  if (event.target.classList.contains('previous-month')) {
+  if (event.target.classList.contains('fa-chevron-left')) {
     animateMonthChange(false);
-  } else if (event.target.classList.contains('next-month')) {
+  } else if (event.target.classList.contains('fa-chevron-right')) {
     animateMonthChange(true);
   } else if (
     event.target.classList.contains('date') ||
@@ -305,20 +306,6 @@ function handleMonthChange(event) {
   }
 
   updateHeader();
-
-  // const {
-  //   daysInMonth: daysInSelectedMonth,
-  //   firstDay: firstDayInSelectedMonth
-  // } = getMonthData(selectedYear, selectedMonth);
-
-  // resetDaysContainer();
-
-  // loadCalendar(
-  //   firstDayInSelectedMonth,
-  //   daysInSelectedMonth,
-  //   selectedMonth,
-  //   selectedYear
-  // );
 }
 
 function updateHeader() {
@@ -332,44 +319,48 @@ function animateMonthChange(isNext) {
   const nextWrapper =
     activeWrapper.nextElementSibling || activeWrapper.previousElementSibling;
 
+  animationClass =
+    isNext === 'today'
+      ? selectedYear > year || (selectedYear === year && selectedMonth > month)
+        ? 'slide-right'
+        : 'slide-left'
+      : isNext
+      ? 'slide-left'
+      : 'slide-right';
+  updateSelectedMonthAndYear(isNext);
   const { daysInMonth, firstDay } = getMonthData(selectedYear, selectedMonth);
 
-  animationClass =
-    isNext === 'today' ? '' : isNext ? 'slide-left' : 'slide-right';
   // Apply animation class
   activeWrapper.classList.add(animationClass); // Animate the current wrapper OUT
-  
+
   nextWrapper.classList.add(
     animationClass === 'slide-left' ? 'slide-right' : 'slide-left'
   ); // Animate the next wrapper IN
-  
+
   setTimeout(() => {
-    
     nextWrapper.classList.add('active');
     activeWrapper.innerHTML = ''; // Clear the container
     activeWrapper.classList.remove('active');
     activeWrapper.classList.remove(animationClass);
-    
-    
+
     // setTimeout(() => {
-      
-      resetDaysContainer(nextWrapper);
-      
-      loadCalendar(
-        firstDay,
-        daysInMonth,
-        selectedMonth,
-        selectedYear,
-        nextWrapper
-      );
-      // Update the daysWrapper variable:
-      daysWrapper = document.querySelector('.days-wrapper.active'); // This is important!
-      
-      updateSelectedMonthAndYear(isNext);
-      updateHeader();
-      nextWrapper.classList.remove(
-        animationClass === 'slide-left' ? 'slide-right' : 'slide-left'
-      );
+
+    resetDaysContainer(nextWrapper);
+
+    loadCalendar(
+      firstDay,
+      daysInMonth,
+      selectedMonth,
+      selectedYear,
+      nextWrapper
+    );
+    // Update the daysWrapper variable:
+    daysWrapper = document.querySelector('.days-wrapper.active'); // This is important!
+
+    updateHeader();
+    nextWrapper.classList.remove(
+      animationClass === 'slide-left' ? 'slide-right' : 'slide-left'
+    );
     // }, 1000);
   }, 200);
 }
