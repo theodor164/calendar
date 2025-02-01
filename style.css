@@ -1,0 +1,349 @@
+.slide-left {
+  transform: translateX(-100%);
+}
+
+.slide-right {
+  transform: translateX(100%);
+}
+
+.days-container {
+  overflow: hidden; /* ✅ Prevents overflow issues */
+  width: 100%;
+}
+
+.days-wrapper {
+  position: absolute; /* 🔥 Needed for smooth transitions */
+  transition: transform 0.2s ease-in-out;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr); /* 7 equal columns */
+  gap: 5px;
+  text-align: center;
+  overflow: hidden;
+  width: 100%;
+}
+
+
+.days-wrapper.active{
+  transition: transform 0.2s ease-in-out;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr); /* 7 equal columns */
+  gap: 5px; /* Spacing between the days */
+  text-align: center;
+  overflow: hidden; /* Hide overflow during animation */
+  position: relative;
+  width: 100%;
+}
+.days-wrapper div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px; /* Fixed height for consistent sizing */
+  border-radius: 45px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  background-color: #ffffff; /* Default background color */
+  /*box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); */
+}
+
+.days-slide-container {
+  display: flex; /* Allows the slide animation */
+  width: 100%; /* Match the container's width */
+  overflow: hidden; /* Prevent overflow during animation */
+}
+
+.marked-as-today {
+  /*background-color: #007bff !important;*/
+  border: 3px solid #bc1d23;
+  font-weight: bold;
+  border-radius: 50%;
+}
+
+.day {
+  transition: background 0.3s ease-in-out;
+}
+
+.day:hover {
+  /*background-color: #777;*/
+  border: 1px solid #777;
+  /*color: #fff;*/
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.day-names {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  font-weight: bold;
+  padding: 5px;
+  border-radius: 5px;
+  width: 100%;
+}
+
+.day-names span {
+  display: grid;
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 10px;
+  gap: 6px; /* Optional spacing */
+}
+
+.month-switcher {
+  cursor: pointer;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.month-switcher:hover {
+  cursor: pointer;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.month-selector {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.hidden {
+  display: none;
+}
+
+.selected-month-and-year {
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.selected-month {
+  width: 71px;
+  text-align: center;
+}
+
+.today-day {
+  cursor: pointer;
+}
+
+.date {
+  cursor: pointer;
+}
+
+.event-day {
+  background-color: #ffcc00 !important;
+  font-weight: bold;
+  color: #333;
+  border-radius: 5px;
+}
+
+.event-day:hover {
+  background: #ffaa00;
+}
+
+.empty-day {
+  visibility: hidden;
+}
+
+.days-container div.marked-as-today.event-day {
+  background-color: #007bff !important; /* Priority for today color */
+  color: #fff !important; /* Ensure text is visible */
+  font-weight: bold; /* Combine bold from both styles */
+  border-radius: 50%; /* Prioritize today's rounded look */
+}
+
+.calendar-container {
+  display: flex;
+  flex-direction: column;
+  flex: 3;
+  background-color: #fff; /* Light background */
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  padding: 20px;
+  box-sizing: content-box;
+}
+
+.today-date {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /*font-size: 1.2em;*/
+  text-transform: uppercase;
+  font-weight: 500;
+  /*background-color: rgb(219 219 189);*/
+  color: #999;
+  border: 1px solid #999;
+  border-radius: 8px;
+  margin-top: 20px;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.events-container {
+  flex: 8;
+  display: flex;
+  flex-wrap: wrap; /* Allows content to wrap if needed */
+  gap: 20px; /* Space between event details and picture */
+}
+
+.event-details {
+  font-size: 1em;
+  color: #555;
+}
+
+.event-details h1 {
+  font-size: 1.5em;
+  color: #333;
+}
+
+.event-details p {
+  font-size: 1em;
+  color: #777;
+}
+
+.events {
+  display: flex;
+  gap: 80px; /* Space between calendar and events */
+  align-items: flex-start; /* Align the sections at the top */
+}
+
+.hover-over-current-date {
+  background: #bc1d23;
+  color: #fff;
+}
+
+.event-date svg,
+.event-hour svg,
+.event-button svg {
+  margin-right: 10px;
+  font-size: 16px;
+  color: #bc1d23;
+  height: 16px;
+}
+
+/* Event description styling */
+.event-description {
+  font-weight: 450;
+  font-size: 17px;
+  line-height: 1.5;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* Button styling */
+.event-button {
+  display: inline-block;
+  background: #bc1d23;
+  padding: 14px 30px;
+  border-radius: 100px;
+  color: #fff;
+  margin-top: 0px;
+  font-weight: 700;
+  margin-bottom: 0;
+  text-decoration: none;
+  margin-top: 20px;
+
+  max-width: fit-content;
+}
+
+.event-button svg {
+  color: #fff;
+}
+
+.event-button:hover {
+  background-color: #fff; /* Darker shade on hover */
+  border: 1px solid #bc1d23;
+  color: #bc1d23;
+}
+
+.event-button:hover svg {
+  color: #bc1d23;
+}
+
+/* Event information styling */
+.event-information {
+  flex: 3; /* Takes up more space compared to the picture */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 35px 0px;
+}
+
+.event-title {
+  font-weight: 700;
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.event-picture-container {
+  display: flex;
+  justify-content: center;
+  flex: 2;
+  border-radius: 10px;
+  height: auto;
+  min-height: 200px; /* Adjust height as needed */
+}
+
+.event-picture {
+  width: 100%; /* Adjust width as needed */
+  height: 100%; /* Adjust height as needed */
+  object-fit: contain; /* Ensures full image is visible */
+  border-radius: 10px;
+}
+
+.line-for-cards {
+  margin: 8px 0;
+  width: 40%;
+  background: #a0a0a0;
+}
+
+.event-date,
+.event-hour {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  margin: 10px 0;
+  text-align: left;
+  color: #333333;
+}
+
+.next-course {
+  font-size: 22px;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  font-weight: 350;
+}
+
+@media (max-width: 768px) {
+  .events {
+    flex-direction: column; /* Stack sections vertically on smaller screens */
+    align-items: center;
+  }
+
+  .events-container {
+    flex-direction: column; /* Stack event details and picture */
+    width: 252.5px;
+  }
+
+  .event-picture-container {
+    justify-content: flex-start;
+    min-height: 136px;
+  }
+
+  .event-picture {
+    width: 252.5px;
+  }
+
+  .event-information {
+    padding: 19px;
+  }
+}
+
+@media (max-width: 1300px) {
+  .events-container {
+    flex-direction: column-reverse;
+  }
+
+  .event-picture {
+    max-height: 200px;
+  }
+}

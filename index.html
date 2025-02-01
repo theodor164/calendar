@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calendar</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="style2.css" />
+    <script src="script.js" defer></script>
+    <script src="script2.js"></script>
+  </head>
+  <body>
+    <section class="events">
+      <div class="calendar-container">
+        <div class="month-selector">
+          <div class="month-switcher previous-month"><</div>
+          <div class="selected-month-and-year">
+            <div class="selected-month"></div>
+            <div class="selected-year"></div>
+          </div>
+          <div class="month-switcher next-month">></div>
+        </div>
+        <div class="day-names">
+          <span>L</span>
+          <span>M</span>
+          <span>M</span>
+          <span>J</span>
+          <span>V</span>
+          <span>S</span>
+          <span>D</span>
+        </div>
+        <div class="days-container">
+          <div class="days-slide-container">
+            <div class="days-wrapper active"></div>
+            <div class="days-wrapper"></div>
+          </div>
+        </div>
+        <div class="today-date">
+          <div class="today-day"></div>
+        </div>
+      </div>
+      <div class="events-container">
+        <div class="event-information">
+          <div class="next-course">Urmatorul curs va fi:</div>
+          <div class="event-title"></div>
+          <div class="event-description"></div>
+          <hr class="line-for-cards" />
+          <div class="event-date"></div>
+          <div class="event-hour"></div>
+          <hr class="line-for-cards" />
+          <a class="event-button"></a>
+        </div>
+        <div class="event-picture-container">
+          <img class="event-picture" alt="Event Image" />
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
