@@ -1,59 +1,24 @@
-.slide-left {
-  transform: translateX(-100%);
-}
-
-.slide-right {
-  transform: translateX(100%);
-}
-
 .days-container {
-  overflow: hidden; /* ✅ Prevents overflow issues */
-  width: 100%;
-}
-
-.days-wrapper {
-  position: absolute; /* 🔥 Needed for smooth transitions */
-  transition: transform 0.2s ease-in-out;
-  display: grid;
-  grid-template-columns: repeat(7, 1fr); /* 7 equal columns */
-  gap: 5px;
-  text-align: center;
-  overflow: hidden;
-  width: 100%;
-}
-
-
-.days-wrapper.active{
-  transition: transform 0.2s ease-in-out;
   display: grid;
   grid-template-columns: repeat(7, 1fr); /* 7 equal columns */
   gap: 5px; /* Spacing between the days */
   text-align: center;
-  overflow: hidden; /* Hide overflow during animation */
-  position: relative;
-  width: 100%;
 }
-.days-wrapper div {
+
+.days-container div {
   display: flex;
   align-items: center;
   justify-content: center;
   height: 40px; /* Fixed height for consistent sizing */
-  border-radius: 45px;
+  border-radius: 5px;
   cursor: pointer;
   font-size: 0.9rem;
   background-color: #ffffff; /* Default background color */
-  /*box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); */
-}
-
-.days-slide-container {
-  display: flex; /* Allows the slide animation */
-  width: 100%; /* Match the container's width */
-  overflow: hidden; /* Prevent overflow during animation */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
 }
 
 .marked-as-today {
-  /*background-color: #007bff !important;*/
-  border: 3px solid #bc1d23;
+  background-color: #007bff !important;
   font-weight: bold;
   border-radius: 50%;
 }
@@ -63,9 +28,8 @@
 }
 
 .day:hover {
-  /*background-color: #777;*/
-  border: 1px solid #777;
-  /*color: #fff;*/
+  background-color: #007bff;
+  color: #fff;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 }
 
@@ -73,6 +37,7 @@
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   font-weight: bold;
+  background: #ddd;
   padding: 5px;
   border-radius: 5px;
   width: 100%;
@@ -102,7 +67,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 .hidden {
@@ -111,8 +76,6 @@
 
 .selected-month-and-year {
   text-align: center;
-  text-transform: uppercase;
-  letter-spacing: 1px;
 }
 
 .selected-month {
@@ -153,9 +116,9 @@
 .calendar-container {
   display: flex;
   flex-direction: column;
-  flex: 3;
-  background-color: #fff; /* Light background */
-  border-radius: 15px;
+  max-width: 300px;
+  background-color: #f7f7f7; /* Light background */
+  border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
   padding: 20px;
   box-sizing: content-box;
@@ -165,20 +128,21 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  /*font-size: 1.2em;*/
-  text-transform: uppercase;
-  font-weight: 500;
-  /*background-color: rgb(219 219 189);*/
-  color: #999;
-  border: 1px solid #999;
+  font-size: 1.2em;
+  font-weight: bold;
+  background-color: rgb(219 219 189);
+  color: white;
   border-radius: 8px;
-  margin-top: 20px;
+  margin-top: 10px;
   padding: 10px;
   cursor: pointer;
 }
 
 .events-container {
-  flex: 8;
+  flex: 1; /* Allow the events section to take the remaining space */
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
   display: flex;
   flex-wrap: wrap; /* Allows content to wrap if needed */
   gap: 20px; /* Space between event details and picture */
@@ -201,18 +165,15 @@
 
 .events {
   display: flex;
-  gap: 80px; /* Space between calendar and events */
+  gap: 20px; /* Space between calendar and events */
   align-items: flex-start; /* Align the sections at the top */
 }
 
 .hover-over-current-date {
-  background: #bc1d23;
-  color: #fff;
+  background: #007bff;
 }
 
-.event-date svg,
-.event-hour svg,
-.event-button svg {
+.event-date svg, .event-hour svg, .event-button svg {
   margin-right: 10px;
   font-size: 16px;
   color: #bc1d23;
@@ -221,63 +182,45 @@
 
 /* Event description styling */
 .event-description {
-  font-weight: 450;
-  font-size: 17px;
-  line-height: 1.5;
-  color: #333;
+  font-size: 1rem;
   margin-bottom: 20px;
 }
 
 /* Button styling */
 .event-button {
-  display: inline-block;
-  background: #bc1d23;
-  padding: 14px 30px;
-  border-radius: 100px;
-  color: #fff;
+  width: 191px;
   margin-top: 0px;
   font-weight: 700;
   margin-bottom: 0;
   text-decoration: none;
-  margin-top: 20px;
-
-  max-width: fit-content;
-}
-
-.event-button svg {
-  color: #fff;
+  display: flex;
+  justify-items: flex-start;
 }
 
 .event-button:hover {
-  background-color: #fff; /* Darker shade on hover */
-  border: 1px solid #bc1d23;
-  color: #bc1d23;
-}
-
-.event-button:hover svg {
-  color: #bc1d23;
+  background-color: #c0cad4; /* Darker shade on hover */
 }
 
 /* Event information styling */
 .event-information {
-  flex: 3; /* Takes up more space compared to the picture */
+  flex: 2; /* Takes up more space compared to the picture */
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 35px 0px;
+  padding: 35px;
 }
 
 .event-title {
   font-weight: 700;
-  font-size: 24px;
+  font-size: 20px;
   color: #333;
-  margin-bottom: 10px;
+  margin: 0;
 }
 
 .event-picture-container {
-  display: flex;
-  justify-content: center;
-  flex: 2;
+    display: flex;
+    justify-content: center;
+  flex: 1;
   border-radius: 10px;
   height: auto;
   min-height: 200px; /* Adjust height as needed */
@@ -288,11 +231,12 @@
   height: 100%; /* Adjust height as needed */
   object-fit: contain; /* Ensures full image is visible */
   border-radius: 10px;
+  width: 500px;
 }
 
 .line-for-cards {
-  margin: 8px 0;
-  width: 40%;
+  margin: 15px 0;
+  width: 20%;
   background: #a0a0a0;
 }
 
@@ -307,10 +251,8 @@
 }
 
 .next-course {
-  font-size: 22px;
+  font-size: x-large;
   margin-bottom: 20px;
-  text-transform: uppercase;
-  font-weight: 350;
 }
 
 @media (max-width: 768px) {
@@ -318,23 +260,23 @@
     flex-direction: column; /* Stack sections vertically on smaller screens */
     align-items: center;
   }
-
+  
   .events-container {
     flex-direction: column; /* Stack event details and picture */
     width: 252.5px;
   }
-
+  
   .event-picture-container {
-    justify-content: flex-start;
-    min-height: 136px;
+      justify-content: flex-start;
+      min-height: 136px;
   }
-
+  
   .event-picture {
-    width: 252.5px;
+      width: 252.5px;
   }
-
+  
   .event-information {
-    padding: 19px;
+      padding: 19px;
   }
 }
 
