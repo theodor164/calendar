@@ -1,20 +1,54 @@
+.slide-left {
+  transform: translateX(-100%);
+}
+
+.slide-right {
+  transform: translateX(100%);
+}
+
 .days-container {
+  overflow: hidden; /* ✅ Prevents overflow issues */
+  width: 100%;
+}
+
+.days-wrapper {
+  position: absolute; /* 🔥 Needed for smooth transitions */
+  transition: transform 0.2s ease-in-out;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr); /* 7 equal columns */
+  gap: 5px;
+  text-align: center;
+  overflow: hidden;
+  width: 100%;
+}
+
+
+.days-wrapper.active{
+  transition: transform 0.2s ease-in-out;
   display: grid;
   grid-template-columns: repeat(7, 1fr); /* 7 equal columns */
   gap: 5px; /* Spacing between the days */
   text-align: center;
+  overflow: hidden; /* Hide overflow during animation */
+  position: relative;
+  width: 100%;
 }
-
-.days-container div {
+.days-wrapper div {
   display: flex;
   align-items: center;
   justify-content: center;
   height: 40px; /* Fixed height for consistent sizing */
-  border-radius: 5px;
+  border-radius: 45px;
   cursor: pointer;
   font-size: 0.9rem;
   background-color: #ffffff; /* Default background color */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  /*box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); */
+}
+
+.days-slide-container {
+  display: flex; /* Allows the slide animation */
+  width: 100%; /* Match the container's width */
+  overflow: hidden; /* Prevent overflow during animation */
 }
 
 .marked-as-today {
