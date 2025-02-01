@@ -121,7 +121,8 @@ const events = {
   }
 };
 
-showEventDetails({ date: '2025-02-25', ...events['2025-02-25'] });
+const closestEvent = getClosestEvent(events);
+showEventDetails(closestEvent);
 
 // Display the current date
 
@@ -243,7 +244,6 @@ function handleEventDisplay(event) {
 }
 
 function showEventDetails(event) {
-
   const eventDate =
     `${event.date.split('-')[2]}` +
     ` ${monthsOfTheYear[parseInt(event.date.split('-')[1] - 1)]}` +
@@ -251,15 +251,8 @@ function showEventDetails(event) {
 
   nextCourseReminder.innerHTML = isClosestEvent(event.date, events)
     ? 'Urmatorul curs va fi:'
-    : '';
+    : 'Te poti inscrie si la:';
 
-  if (isClosestEvent(event.date, events)) {
-    nextCourseReminder.style.visibility = 'visible';
-    nextCourseReminder.style.height = 'auto'; // Show the full element
-  } else {
-    nextCourseReminder.style.visibility = 'hidden';
-    nextCourseReminder.style.height = '36px'; // Collapse the space
-  }
 
   eventDateElement.innerHTML = `
   <svg class="svg-inline--fa fa-calendar-days" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="calendar-days" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M128 0c17.7 0 32 14.3 32 32l0 32 128 0 0-32c0-17.7 14.3-32 32-32s32 14.3 32 32l0 32 48 0c26.5 0 48 21.5 48 48l0 48L0 160l0-48C0 85.5 21.5 64 48 64l48 0 0-32c0-17.7 14.3-32 32-32zM0 192l448 0 0 272c0 26.5-21.5 48-48 48L48 512c-26.5 0-48-21.5-48-48L0 192zm64 80l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0c-8.8 0-16 7.2-16 16zm128 0l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0c-8.8 0-16 7.2-16 16zm144-16c-8.8 0-16 7.2-16 16l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0zM64 400l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0c-8.8 0-16 7.2-16 16zm144-16c-8.8 0-16 7.2-16 16l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0zm112 16l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0c-8.8 0-16 7.2-16 16z"></path></svg>
@@ -281,10 +274,6 @@ function showEventDetails(event) {
 
 todayDayContainer.addEventListener('click', handleMonthChange);
 
-function setDayMonthChangeClickHandler(dayElement) {
-  dayElement.addEventListener('click', handleMonthChange);
-}
-
 previousMonthButton.addEventListener('click', handleMonthChange);
 nextMonthButton.addEventListener('click', handleMonthChange);
 
@@ -303,6 +292,7 @@ function handleMonthChange(event) {
       return; // Do nothing if the selected month is the same as today
     }
     animateMonthChange('today');
+    showEventDetails(closestEvent);
   }
 
   updateHeader();
@@ -435,19 +425,4 @@ function handleSwipe() {
     animateMonthChange(false);
   }
 
-  updateHeader();
-
-  const {
-    daysInMonth: daysInSelectedMonth,
-    firstDay: firstDayInSelectedMonth
-  } = getMonthData(selectedYear, selectedMonth);
-
-  resetDaysContainer();
-
-  loadCalendar(
-    firstDayInSelectedMonth,
-    daysInSelectedMonth,
-    selectedMonth,
-    selectedYear
-  );
 }
