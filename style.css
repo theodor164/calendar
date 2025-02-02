@@ -122,10 +122,10 @@
 }
 
 .selected-month-and-year {
+  width: 128px;
   text-align: center;
   text-transform: uppercase;
   letter-spacing: 1px;
-  width: 128px;
 }
 
 .selected-month {

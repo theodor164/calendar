@@ -12,17 +12,6 @@ const todayDayContainer = document.querySelector('.today-date');
 
 const nextCourseReminder = document.querySelector('.next-course');
 
-let daysWrapper = document.querySelector('.days-wrapper.active');
-
-const eventDateElement = document.querySelector('.event-date');
-const eventTitleElement = document.querySelector('.event-title');
-const eventDescriptionElement = document.querySelector('.event-description');
-const eventHourElement = document.querySelector('.event-hour');
-const eventButtonElement = document.querySelector('.event-button');
-const eventPictureElement = document.querySelector('.event-picture');
-
-let animationClass;
-
 const now = new Date();
 const year = now.getFullYear();
 const month = now.getMonth();
@@ -56,85 +45,84 @@ const monthsOfTheYear = [
 
 const events = {
   '2025-02-25': {
-    title: 'BIM | GIS',
+    title:
+      'Obligativitatea de livrare a documentațiilor de urbanism și amenajarea teritoriului în noul format GIS, conform Normelor tehnice aprobate prin Ordinul nr. 904/2023',
     description:
       'Obligativitatea de livrare a documentațiilor de urbanism și amenajarea teritoriului în noul format GIS, conform Normelor tehnice aprobate prin Ordinul nr. 904/2023.',
     time: '17:00',
     pictureLink:
-      'https://oarbucuresti.cursuri.online/Pictures/GetProductPicture/aac0da9e-0852-46a4-99a0-617fc5231852',
-    link: 'https://oarbucuresti.cursuri.online/product/16e1726f-1223-4a62-847e-d25a158f6c8b/obligativitatea-de-livrare-a-documentatiilor-de-urbanism-si-amenajarea-teritoriului-in-noul-format-gis-conform-normelor-tehnice-aprobate-prin-ordinul-nr-904-2023/allbim-net'
+      'https://oarbucuresti.cursuri.online/Pictures/GetPictureById?pictureId=06935af2-5b52-4353-bb61-b10a0518a570'
   },
   '2025-03-25': {
-    title: 'BIM | COSTS',
+    title:
+      'Avantajele BIM în evaluarea costurilor unui proiect de construcții. Obligații legale și bune practici în realizarea extraselor inteligente de cantități.',
     description:
       'Avantajele BIM în evaluarea costurilor unui proiect de construcții. Obligații legale și bune practici în realizarea extraselor inteligente de cantități.',
     time: '17:00',
     pictureLink:
-      'https://oarbucuresti.cursuri.online/Pictures/GetProductPicture/58a2511f-a126-4f30-a8ef-065730a19daf',
-    link: 'https://oarbucuresti.cursuri.online/product/9a4b53ec-b492-4c4a-a2c1-0cbecb0cd43a/avantajele-bim-in-evaluarea-costurilor-unui-proiect-de-constructii-obligatii-legale-si-bune-practici-in-realizarea-extraselor-inteligente-de-cantitati/allbim-net'
+      'https://oarbucuresti.cursuri.online/Pictures/GetPictureById?pictureId=06935af2-5b52-4353-bb61-b10a0518a570'
   },
   '2025-04-25': {
-    title: 'BIM | DELIVERY',
+    title:
+      'Cum livrezi documentația de arhitectură în format open BIM? Conformarea cu cerințele SR EN ISO 19650.',
     description:
       'Cum livrezi documentația de arhitectură în format open BIM? Conformarea cu cerințele SR EN ISO 19650.',
     time: '17:00',
     pictureLink:
-      'https://oarbucuresti.cursuri.online/Pictures/GetProductPicture/415cc971-e340-473e-9e70-e9d1a4a7f3eb',
-    link: 'https://oarbucuresti.cursuri.online/product/85b4d7e4-d896-43b0-a80f-553ebac3d5ef/cum-livrezi-documentatia-de-arhitectura-in-format-open-bim-conformarea-cu-cerintele-sr-en-iso-19650/allbim-net'
+      'https://oarbucuresti.cursuri.online/Pictures/GetPictureById?pictureId=06935af2-5b52-4353-bb61-b10a0518a570'
   },
   '2025-05-27': {
-    title: 'BIM | RENDER',
+    title:
+      'Tandemul ALLPLAN AI Render și Lumion pentru construirea imaginilor de prezentare imersive',
     description:
       'Tandemul ALLPLAN AI Render și Lumion pentru construirea imaginilor de prezentare imersive.',
     time: '17:00',
     pictureLink:
-      'https://oarbucuresti.cursuri.online/Pictures/GetProductPicture/0dd4bf0b-d412-4fe0-8f84-12e50949e26b',
-    link: 'https://oarbucuresti.cursuri.online/product/cbb45e81-8a0d-4c16-b271-96cb95c96966/tandemul-allplan-ai-render-si-lumion-pentru-construirea-imaginilor-de-prezentare-imersive/allbim-net'
+      'https://oarbucuresti.cursuri.online/Pictures/GetPictureById?pictureId=06935af2-5b52-4353-bb61-b10a0518a570'
   },
   '2025-06-24': {
-    title: 'BIM | LIGHT',
+    title:
+      'Digitalizarea studiului de însorire: respectarea reglementărilor și cerințelor esențiale pentru documentația de proiect.',
     description:
       'Digitalizarea studiului de însorire: respectarea reglementărilor și cerințelor esențiale pentru documentația de proiect.',
     time: '17:00',
     pictureLink:
-      'https://oarbucuresti.cursuri.online/Pictures/GetProductPicture/bcb0110d-1590-4a2a-b1cd-6c844761ec7b',
-    link: 'https://oarbucuresti.cursuri.online/product/a25c3d64-10f1-4a49-9fc6-c2a786e78578/digitalizarea-studiului-de-insorire-si-umbrire-respectarea-reglementarilor-si-cerintelor-esentiale-pentru-documentatia-de-proiect/allbim-net'
+      'https://oarbucuresti.cursuri.online/Pictures/GetPictureById?pictureId=06935af2-5b52-4353-bb61-b10a0518a570'
   },
   '2025-07-29': {
-    title: 'BIM | NZEB',
+    title:
+      'Conformarea energetică a anvelopei NZEB în acord cu metodologia MC-001/2022',
     description:
       'Conformarea energetică a anvelopei NZEB în acord cu metodologia MC-001/2022.',
     time: '17:00',
     pictureLink:
-      'https://oarbucuresti.cursuri.online/Pictures/GetProductPicture/b83120f6-21bb-46a0-b2d4-a06ddcedd7fc',
-    link: 'https://oarbucuresti.cursuri.online/product/b2e783e1-a92d-41ed-ae12-7fddfc7fe66c/conformarea-energetica-a-anvelopei-nzeb-in-acord-cu-metodologia-mc-001-2022/allbim-net'
+      'https://oarbucuresti.cursuri.online/Pictures/GetPictureById?pictureId=06935af2-5b52-4353-bb61-b10a0518a570'
   },
   '2025-09-23': {
-    title: 'BIM | RESTORATION',
+    title:
+      'Monumente istorice: Instrumente pentru digitalizarea istoriei construite prin nori de puncte si fotogrametrie',
     description:
       'Monumente istorice: Instrumente pentru digitalizarea istoriei construite prin nori de puncte si fotogrametrie.',
     time: '17:00',
     pictureLink:
-      'https://oarbucuresti.cursuri.online/Pictures/GetProductPicture/093e419c-c764-40b6-93e3-09223f3b4c28',
-    link: 'https://oarbucuresti.cursuri.online/product/fc71b576-bb83-4a19-b9e8-d778591b6b18/monumente-istorice-instrumente-pentru-digitalizarea-istoriei-construite-prin-nori-de-puncte-si-fotogrametrie/allbim-net'
+      'https://oarbucuresti.cursuri.online/Pictures/GetPictureById?pictureId=06935af2-5b52-4353-bb61-b10a0518a570'
   },
   '2025-10-28': {
-    title: 'BIM | PARAMETRIC',
+    title:
+      'Impactul tehnologiei în proiectarea de arhitectură: unelte pentru programare vizuală și parametrizare',
     description:
       'Impactul tehnologiei în proiectarea de arhitectură: unelte pentru programare vizuală și parametrizare.',
     time: '17:00',
     pictureLink:
-      'https://oarbucuresti.cursuri.online/Pictures/GetProductPicture/99fca7bf-9718-436f-8b85-dd06d2807f0b',
-    link: 'https://oarbucuresti.cursuri.online/product/ff4f2e6b-f29b-4f23-9d2d-772e48e284fe/impactul-tehnologiei-in-proiectarea-de-arhitectura-unelte-pentru-programare-vizuala-si-parametrizare/allbim-net'
+      'https://oarbucuresti.cursuri.online/Pictures/GetPictureById?pictureId=06935af2-5b52-4353-bb61-b10a0518a570'
   }
 };
 
-const closestEvent = getClosestEvent(events);
-showEventDetails(closestEvent);
+showEventDetails({ date: '2025-02-25', ...events['2025-02-25'] });
 
 // Display the current date
 
-todayDay.textContent = 'Întoarce-te la ziua curentă';
+todayDay.textContent = 'Intoarcere la luna curenta';
 selectedMonthElement.textContent = monthsOfTheYear[now.getMonth()];
 selectedYearElement.textContent = now.getFullYear();
 
@@ -150,15 +138,16 @@ function getMonthData(year, month) {
 
 resetDaysContainer(); // Reset the days container
 
-function resetDaysContainer(wrapper = daysWrapper) {
-  wrapper.innerHTML = ''; // Clear the container
+function resetDaysContainer() {
+  daysContainer.innerHTML = ''; // Clear the container
+
   const { daysInMonth, firstDay } = getMonthData(selectedYear, selectedMonth);
 
   // Add empty divs for previous month days
   for (let i = 0; i < firstDay; i++) {
     const emptyDiv = document.createElement('div');
     emptyDiv.classList.add('day', 'empty-day');
-    wrapper.appendChild(emptyDiv);
+    daysContainer.appendChild(emptyDiv);
   }
 
   // Add actual days of the month
@@ -166,20 +155,13 @@ function resetDaysContainer(wrapper = daysWrapper) {
     const dayContainer = document.createElement('div');
     dayContainer.classList.add('day');
     dayContainer.textContent = i;
-    wrapper.appendChild(dayContainer);
+    daysContainer.appendChild(dayContainer);
   }
 }
 
 loadCalendar(firstDay, daysInMonth, month, year);
-highlightSelectedDay(closestEvent.date);
 
-function loadCalendar(
-  firstDay,
-  daysInMonth,
-  selectedMonth,
-  selectedYear,
-  wrapper = daysWrapper
-) {
+function loadCalendar(firstDay, daysInMonth, selectedMonth, selectedYear) {
   let dayIndex = 0;
 
   for (let day = 1; day <= firstDay; day++) {
@@ -192,15 +174,7 @@ function loadCalendar(
     const isTodayFlag = isToday(day, selectedMonth, selectedYear);
     const eventFlag = checkForEvent(day, selectedMonth, selectedYear);
 
-    populateDay(
-      dayIndex,
-      day,
-      isTodayFlag ? 'marked-as-today' : '',
-      eventFlag,
-      wrapper,
-      selectedYear,
-      selectedMonth
-    );
+    populateDay(dayIndex, day, isTodayFlag ? 'marked-as-today' : '', eventFlag);
     dayIndex++;
   }
 }
@@ -219,28 +193,17 @@ function checkForEvent(day, month, year) {
   return events[dateString] ? 'event-day' : '';
 }
 
-function populateDay(
-  index,
-  text,
-  additionalClass = '',
-  eventClass = '',
-  wrapper = daysWrapper,
-  year,
-  month
-) {
-  const dayElement = wrapper.children[index];
+function populateDay(index, text, additionalClass = '', eventClass = '') {
+  const dayElement = daysContainer.children[index];
   dayElement.textContent = text;
   dayElement.className = `day ${additionalClass} ${eventClass}`;
 
-  // const newDayElement = dayElement.cloneNode(true); // Remove event listeners of the days in the previous and next month
-
-  const dateString = new Date(year, month, text).toLocaleDateString('en-CA');
-  dayElement.setAttribute('data-date', dateString);
+  const newDayElement = dayElement.cloneNode(true); // Remove event listeners of the days in the previous and next month
 
   if (dayElement.classList.contains('event-day')) {
-    setEventDayClickHandler(dayElement);
+    setEventDayClickHandler(newDayElement);
   }
-  // dayElement.replaceWith(newDayElement);
+  dayElement.replaceWith(newDayElement);
 }
 
 function setEventDayClickHandler(dayElement) {
@@ -255,14 +218,18 @@ function handleEventDisplay(event) {
   ).toLocaleDateString('en-CA');
 
   if (event.target.classList.contains('event-day')) {
-    const eventDetails = { date: eventDate, ...events[eventDate] };
-    showEventDetails(eventDetails);
-    // Highlight the day in the calendar
-    highlightSelectedDay(eventDate);
+    showEventDetails({ date: eventDate, ...events[eventDate] });
   }
 }
 
 function showEventDetails(event) {
+  const eventDateElement = document.querySelector('.event-date');
+  const eventTitleElement = document.querySelector('.event-title');
+  const eventDescriptionElement = document.querySelector('.event-description');
+  const eventHourElement = document.querySelector('.event-hour');
+  const eventButtonElement = document.querySelector('.event-button');
+  const eventPictureElement = document.querySelector('.event-picture');
+
   const eventDate =
     `${event.date.split('-')[2]}` +
     ` ${monthsOfTheYear[parseInt(event.date.split('-')[1] - 1)]}` +
@@ -270,7 +237,15 @@ function showEventDetails(event) {
 
   nextCourseReminder.innerHTML = isClosestEvent(event.date, events)
     ? 'Urmatorul curs va fi:'
-    : 'Te poti inscrie si la:';
+    : '';
+
+  if (isClosestEvent(event.date, events)) {
+    nextCourseReminder.style.visibility = 'visible';
+    nextCourseReminder.style.height = 'auto'; // Show the full element
+  } else {
+    nextCourseReminder.style.visibility = 'hidden';
+    nextCourseReminder.style.height = '36px'; // Collapse the space
+  }
 
   eventDateElement.innerHTML = `
   <svg class="svg-inline--fa fa-calendar-days" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="calendar-days" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M128 0c17.7 0 32 14.3 32 32l0 32 128 0 0-32c0-17.7 14.3-32 32-32s32 14.3 32 32l0 32 48 0c26.5 0 48 21.5 48 48l0 48L0 160l0-48C0 85.5 21.5 64 48 64l48 0 0-32c0-17.7 14.3-32 32-32zM0 192l448 0 0 272c0 26.5-21.5 48-48 48L48 512c-26.5 0-48-21.5-48-48L0 192zm64 80l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0c-8.8 0-16 7.2-16 16zm128 0l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0c-8.8 0-16 7.2-16 16zm144-16c-8.8 0-16 7.2-16 16l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0zM64 400l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0c-8.8 0-16 7.2-16 16zm144-16c-8.8 0-16 7.2-16 16l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0zm112 16l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0c-8.8 0-16 7.2-16 16z"></path></svg>
@@ -281,22 +256,29 @@ function showEventDetails(event) {
   eventHourElement.innerHTML =
     '<svg class="svg-inline--fa fa-clock-five" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="clock-five" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zm24-392l0 128.7 60 90c7.4 11 4.4 25.9-6.7 33.3s-25.9 4.4-33.3-6.7l-64-96c-2.6-3.9-4-8.6-4-13.3l0-136c0-13.3 10.7-24 24-24s24 10.7 24 24z"></path></svg> Ora ' +
     event.time;
-  eventButtonElement.setAttribute('href', `${event.link}`);
+  eventButtonElement.setAttribute(
+    'href',
+    'http://www.facebook.com/theodor.tanase'
+  );
   eventPictureElement.setAttribute('src', event.pictureLink);
   eventButtonElement.innerHTML =
-    '<svg class="svg-inline--fa fa-arrow-right-long" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="arrow-right-long" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M502.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l370.7 0-73.4 73.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l128-128z"></path></svg> Inscrie-te la acest curs';
+    '<svg class="svg-inline--fa fa-arrow-right-long" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="arrow-right-long" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M502.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l370.7 0-73.4 73.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l128-128z"></path></svg> Înscrie-te la acest curs';
 }
 
 todayDayContainer.addEventListener('click', handleMonthChange);
+
+function setDayMonthChangeClickHandler(dayElement) {
+  dayElement.addEventListener('click', handleMonthChange);
+}
 
 previousMonthButton.addEventListener('click', handleMonthChange);
 nextMonthButton.addEventListener('click', handleMonthChange);
 
 function handleMonthChange(event) {
   if (event.target.classList.contains('previous-month')) {
-    animateMonthChange(false);
+    updateSelectedMonthAndYear(false);
   } else if (event.target.classList.contains('next-month')) {
-    animateMonthChange(true);
+    updateSelectedMonthAndYear(true);
   } else if (
     event.target.classList.contains('date') ||
     event.target.classList.contains('today-date') ||
@@ -306,69 +288,29 @@ function handleMonthChange(event) {
     if (selectedMonth === month && selectedYear === year) {
       return; // Do nothing if the selected month is the same as today
     }
-    animateMonthChange('today');
-    showEventDetails(closestEvent);
+    updateSelectedMonthAndYear('today');
   }
 
   updateHeader();
+
+  const {
+    daysInMonth: daysInSelectedMonth,
+    firstDay: firstDayInSelectedMonth
+  } = getMonthData(selectedYear, selectedMonth);
+
+  resetDaysContainer();
+
+  loadCalendar(
+    firstDayInSelectedMonth,
+    daysInSelectedMonth,
+    selectedMonth,
+    selectedYear
+  );
 }
 
 function updateHeader() {
   selectedMonthElement.textContent = monthsOfTheYear[selectedMonth];
   selectedYearElement.textContent = selectedYear;
-}
-
-// Function to animate and update the calendar
-function animateMonthChange(isNext) {
-  const activeWrapper = document.querySelector('.days-wrapper.active');
-  const nextWrapper =
-    activeWrapper.nextElementSibling || activeWrapper.previousElementSibling;
-
-  animationClass =
-    isNext === 'today'
-      ? selectedYear > year || (selectedYear === year && selectedMonth > month)
-        ? 'slide-right'
-        : 'slide-left'
-      : isNext
-      ? 'slide-left'
-      : 'slide-right';
-  updateSelectedMonthAndYear(isNext);
-  const { daysInMonth, firstDay } = getMonthData(selectedYear, selectedMonth);
-
-  // Apply animation class
-  activeWrapper.classList.add(animationClass); // Animate the current wrapper OUT
-
-  nextWrapper.classList.add(
-    animationClass === 'slide-left' ? 'slide-right' : 'slide-left'
-  ); // Animate the next wrapper IN
-
-  setTimeout(() => {
-    nextWrapper.classList.add('active');
-    activeWrapper.innerHTML = ''; // Clear the container
-    activeWrapper.classList.remove('active');
-    activeWrapper.classList.remove(animationClass);
-
-    // setTimeout(() => {
-
-    resetDaysContainer(nextWrapper);
-
-    loadCalendar(
-      firstDay,
-      daysInMonth,
-      selectedMonth,
-      selectedYear,
-      nextWrapper
-    );
-    // Update the daysWrapper variable:
-    daysWrapper = document.querySelector('.days-wrapper.active'); // This is important!
-
-    updateHeader();
-    nextWrapper.classList.remove(
-      animationClass === 'slide-left' ? 'slide-right' : 'slide-left'
-    );
-    highlightSelectedDay(closestEvent.date);
-    // }, 1000);
-  }, 200);
 }
 
 function updateSelectedMonthAndYear(isNext) {
@@ -416,43 +358,4 @@ function getClosestEvent(events) {
 function isClosestEvent(selectedDate, events) {
   const closestEvent = getClosestEvent(events);
   return closestEvent.date === selectedDate;
-}
-
-calendarContainer = document.querySelector('.calendar-container');
-
-let touchStartX = 0;
-let touchEndX = 0;
-
-calendarContainer.addEventListener('touchstart', (event) => {
-  touchStartX = event.touches[0].clientX;
-});
-
-calendarContainer.addEventListener('touchend', (event) => {
-  touchEndX = event.changedTouches[0].clientX;
-  handleSwipe();
-});
-
-function handleSwipe() {
-  const swipeThreshold = 50;
-
-  if (touchStartX - touchEndX > swipeThreshold) {
-    animateMonthChange(true);
-  } else if (touchEndX - touchStartX > swipeThreshold) {
-    animateMonthChange(false);
-  }
-}
-
-function highlightSelectedDay(eventDateString) {
-  // Remove highlight from any previously highlighted day
-  document.querySelectorAll('.day.highlighted-event').forEach((el) => {
-    el.classList.remove('highlighted-event');
-  });
-
-  // Find the day element that has the matching data-date attribute
-  const dayElement = document.querySelector(
-    `.day[data-date="${eventDateString}"]`
-  );
-  if (dayElement) {
-    dayElement.classList.add('highlighted-event');
-  }
 }
