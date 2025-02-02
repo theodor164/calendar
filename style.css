@@ -113,7 +113,7 @@
   grid-template-columns: repeat(7, 1fr); /* Arrow | Month | Arrow */
   align-items: center;
   margin-bottom: 20px;
-  width: 100%; 
+  width: 100%;
   justify-items: center;
 }
 
@@ -125,6 +125,7 @@
   text-align: center;
   text-transform: uppercase;
   letter-spacing: 1px;
+  width: 128px;
 }
 
 .selected-month {
@@ -308,9 +309,18 @@
   font-weight: 350;
 }
 
+.day.highlighted-event {
+  background-color: #f9d342; /* or any color that fits your design */
+  border: 2px solid blue;
+  border-radius: 45px;
+}
+
+.event-picture-container {
+  height: fit-content;
+}
 @media (max-width: 576.98px) {
   .calendar-container {
-    width: 90%;
+    width: 87%;
   }
 
   .events {
@@ -334,7 +344,7 @@
 
   .event-picture {
     width: auto; /* Allow natural width */
-  max-width: 100%; /* Ensure responsiveness */
+    max-width: 100%; /* Ensure responsiveness */
   }
 }
 
@@ -353,7 +363,7 @@
     flex-direction: column-reverse;
     align-items: center;
   }
-  
+
   .event-picture-container {
     width: 70%;
   }
