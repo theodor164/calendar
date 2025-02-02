@@ -144,7 +144,6 @@ const events = {
 const closestEvent = getClosestEvent(events);
 showEventDetails(closestEvent);
 selectedEventDay = closestEvent.date;
-console.log(selectedEventDay);
 
 // Display the current date
 
