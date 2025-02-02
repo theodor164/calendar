@@ -62,7 +62,7 @@
   justify-content: center;
   height: 40px; /* Fixed height for consistent sizing */
   border-radius: 45px;
-  cursor: pointer;
+  /* cursor: pointer; */
   font-size: 0.9rem;
   background-color: #ffffff; /* Default background color */
   /*box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); */
@@ -159,6 +159,7 @@
   font-weight: bold;
   color: #333;
   border-radius: 5px;
+  cursor: pointer;
 }
 
 .event-day:hover {
@@ -287,6 +288,10 @@
 
 .event-button:hover svg {
   color: #bc1d23;
+}
+
+.event-button-past {
+  background: gray;
 }
 
 .event-title {
