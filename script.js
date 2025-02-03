@@ -31,7 +31,6 @@ let selectedYear = year;
 
 let selectedEventDay;
 
-
 const daysOfTheWeek = [
   'luni',
   'marți',
@@ -130,15 +129,15 @@ const events = {
       '/Pictures/GetPictureById?pictureId=434fd402-f9e1-4764-99b4-2e465d0948e0',
     link: '/product/ff4f2e6b-f29b-4f23-9d2d-772e48e284fe/impactul-tehnologiei-in-proiectarea-de-arhitectura-unelte-pentru-programare-vizuala-si-parametrizare/allbim-net'
   },
-  '2025-02-01': {
-    title: 'BIM | PARAMETRIC',
-    description:
-      'Impactul tehnologiei în proiectarea de arhitectură: unelte pentru programare vizuală și parametrizare.',
-    time: '17:00',
-    pictureLink:
-      '/Pictures/GetPictureById?pictureId=434fd402-f9e1-4764-99b4-2e465d0948e0',
-    link: '/product/ff4f2e6b-f29b-4f23-9d2d-772e48e284fe/impactul-tehnologiei-in-proiectarea-de-arhitectura-unelte-pentru-programare-vizuala-si-parametrizare/allbim-net'
-  }
+//   '2025-02-01': {
+//     title: 'BIM | PARAMETRIC',
+//     description:
+//       'Impactul tehnologiei în proiectarea de arhitectură: unelte pentru programare vizuală și parametrizare.',
+//     time: '17:00',
+//     pictureLink:
+//       '/Pictures/GetPictureById?pictureId=434fd402-f9e1-4764-99b4-2e465d0948e0',
+//     link: '/product/ff4f2e6b-f29b-4f23-9d2d-772e48e284fe/impactul-tehnologiei-in-proiectarea-de-arhitectura-unelte-pentru-programare-vizuala-si-parametrizare/allbim-net'
+//   }
 };
 
 const closestEvent = getClosestEvent(events);
@@ -205,15 +204,15 @@ function loadCalendar(
     const isTodayFlag = isToday(day, selectedMonth, selectedYear);
     const eventFlag = checkForEvent(day, selectedMonth, selectedYear);
 
-    populateDay(
-      dayIndex,
-      day,
-      isTodayFlag ? 'marked-as-today' : '',
-      eventFlag,
-      wrapper,
-      selectedYear,
-      selectedMonth
-    );
+      populateDay(
+        dayIndex,
+        day,
+        isTodayFlag ? 'marked-as-today' : '',
+        eventFlag,
+        wrapper,
+        selectedYear,
+        selectedMonth
+      );
     dayIndex++;
   }
 }
@@ -229,7 +228,11 @@ function isToday(day, month, year) {
 function checkForEvent(day, month, year) {
   const date = new Date(year, month, day);
   const dateString = date.toLocaleDateString('en-CA');
-  return events[dateString] ? 'event-day' : '';
+  if (isPastEvent(dateString)) {
+    return events[dateString] ? 'event-day past-event' : '';
+  } else {
+    return events[dateString] ? 'event-day' : '';
+  }
 }
 
 function populateDay(
@@ -285,7 +288,9 @@ function showEventDetails(event) {
 
   nextCourseReminder.innerHTML = isClosestEvent(event.date, events)
     ? 'Următorul curs va fi:'
-    : isPastEvent(event.date) ? 'Curs indisponibil' :'Te poți înscrie și la:';
+    : isPastEvent(event.date)
+    ? 'Acest curs s-a încheiat'
+    : 'Te poți înscrie și la:';
 
   eventDateElement.innerHTML = `
   <svg class="svg-inline--fa fa-calendar-days" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="calendar-days" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M128 0c17.7 0 32 14.3 32 32l0 32 128 0 0-32c0-17.7 14.3-32 32-32s32 14.3 32 32l0 32 48 0c26.5 0 48 21.5 48 48l0 48L0 160l0-48C0 85.5 21.5 64 48 64l48 0 0-32c0-17.7 14.3-32 32-32zM0 192l448 0 0 272c0 26.5-21.5 48-48 48L48 512c-26.5 0-48-21.5-48-48L0 192zm64 80l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0c-8.8 0-16 7.2-16 16zm128 0l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0c-8.8 0-16 7.2-16 16zm144-16c-8.8 0-16 7.2-16 16l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0zM64 400l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0c-8.8 0-16 7.2-16 16zm144-16c-8.8 0-16 7.2-16 16l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0zm112 16l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0c-8.8 0-16 7.2-16 16z"></path></svg>
@@ -298,15 +303,16 @@ function showEventDetails(event) {
     event.time;
   eventButtonElement.setAttribute('href', `${event.link}`);
   eventPictureElement.setAttribute('src', event.pictureLink);
-  
+
   if (isPastEvent(event.date)) {
     eventButtonElement.classList.add('event-button-past');
+    eventButtonElement.innerHTML =
+      '<svg class="svg-inline--fa fa-arrow-right-long" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="arrow-right-long" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M502.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l370.7 0-73.4 73.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l128-128z"></path></svg> Vezi înregistrarea';
   } else {
     eventButtonElement.classList.remove('event-button-past');
+    eventButtonElement.innerHTML =
+      '<svg class="svg-inline--fa fa-arrow-right-long" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="arrow-right-long" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M502.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l370.7 0-73.4 73.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l128-128z"></path></svg> Află mai multe';
   }
-
-  eventButtonElement.innerHTML =
-    '<svg class="svg-inline--fa fa-arrow-right-long" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="arrow-right-long" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M502.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l370.7 0-73.4 73.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l128-128z"></path></svg> Află mai multe';
 }
 
 todayDayContainer.addEventListener('click', handleMonthChange);
@@ -483,7 +489,7 @@ function highlightSelectedDay(eventDateString) {
 function isPastEvent(selectedDate) {
   const eventDate = new Date(selectedDate);
   const today = new Date();
-  
+
   // Normalize today's date to ignore time
   today.setHours(0, 0, 0, 0);
 
